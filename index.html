@@ -2,18 +2,52 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>36個問題 — 讓兩個人更靠近</title>
-<meta name="description" content="基於心理學家 Arthur Aron 的研究：用36個逐漸深入的問題，讓兩個人更靠近。完全本地儲存、不上傳，最後可匯出成紀念。">
+<meta name="description" content="基於心理學家 Arthur Aron 的研究：用36個逐漸深入的問題，讓兩個人更靠近。完全本地儲存、不上傳，最後可匯出成紀念。免費、無需註冊。">
+<meta name="keywords" content="36個問題,Arthur Aron,讓兩個人相愛,親密感,情侶問題,約會,愛情實驗,36 questions,深入對話">
+<meta name="author" content="JOHNBASS">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0e0c0a">
 <meta name="color-scheme" content="dark">
-<!-- Open Graph / 社群分享預覽 -->
+<link rel="canonical" href="https://johnbass.github.io/36-questions/">
+
+<!-- Open Graph / 社群分享預覽 (LINE, Facebook) -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://johnbass.github.io/36-questions/">
+<meta property="og:site_name" content="36個問題">
 <meta property="og:title" content="36個問題 — 讓兩個人更靠近">
 <meta property="og:description" content="用36個逐漸深入的問題，讓兩個人更靠近。私密、本地儲存，最後留下專屬紀念。">
+<meta property="og:image" content="https://johnbass.github.io/36-questions/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="36個問題 — 讓兩個人更靠近">
 <meta property="og:locale" content="zh_TW">
-<meta name="twitter:card" content="summary">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="36個問題 — 讓兩個人更靠近">
+<meta name="twitter:description" content="用36個逐漸深入的問題，讓兩個人更靠近。私密、本地儲存，最後留下專屬紀念。">
+<meta name="twitter:image" content="https://johnbass.github.io/36-questions/og-image.png">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%AF%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+<!-- 結構化資料 (Google 認識這是一個 Web 應用) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "36個問題 — 讓兩個人更靠近",
+  "url": "https://johnbass.github.io/36-questions/",
+  "description": "基於心理學家 Arthur Aron 的研究：用36個逐漸深入的問題，讓兩個人更靠近。完全本地儲存、不上傳，最後可匯出成紀念。",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "zh-TW",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "author": { "@type": "Person", "name": "JOHNBASS", "url": "https://github.com/JOHNBASS" }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -39,6 +73,8 @@
     font-family: 'Noto Serif TC', serif;
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   /* ── GRAIN OVERLAY ── */
@@ -77,6 +113,26 @@
   }
 
   .intro-content { max-width: 560px; position: relative; z-index: 1; }
+
+  /* ── RESUME CARD ── */
+  .resume-card {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    padding: 18px 20px;
+    margin-bottom: 40px;
+    border: 1px solid var(--accent);
+    background: rgba(201,169,122,0.08);
+    border-radius: 6px;
+    flex-wrap: wrap;
+  }
+  .resume-card.show { display: flex; animation: fadeIn 0.5s ease; }
+  .resume-card-title { font-size: 14px; color: var(--accent2); margin-bottom: 4px; }
+  .resume-card-sub { font-size: 12px; color: var(--text-muted); }
+  .resume-card-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .resume-card-actions .btn { padding: 10px 18px; }
 
   .intro-footer {
     margin-top: 56px;
@@ -265,9 +321,12 @@
 
   .q-header {
     padding: 20px 24px;
+    padding-top: max(20px, env(safe-area-inset-top));
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
     background: var(--surface);
   }
@@ -343,26 +402,117 @@
     width: 100%;
   }
 
+  /* ── QUESTION CARD (抽卡) ── */
+  .q-main { perspective: 1400px; }
+
+  .q-card {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    padding: 44px 32px 28px;
+    margin: 8px auto 36px;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(201,169,122,0.10), transparent 60%),
+      linear-gradient(165deg, var(--surface2), var(--surface));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(232,213,176,0.06);
+    text-align: center;
+    transform-style: preserve-3d;
+    overflow: hidden;
+  }
+  /* a thin gilt top edge, like the card's foil */
+  .q-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 12%; right: 12%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+    opacity: 0.6;
+  }
+
+  /* the deck peeking out behind the drawn card */
+  .q-deck { position: relative; width: 100%; display: flex; justify-content: center; }
+  .q-deck::before, .q-deck::after {
+    content: '';
+    position: absolute;
+    top: 8px; left: 50%;
+    width: min(540px, 100%);
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    z-index: -1;
+  }
+  .q-deck::before { transform: translateX(-50%) translateY(6px) scale(0.965); opacity: 0.55; }
+  .q-deck::after { transform: translateX(-50%) translateY(13px) scale(0.93); opacity: 0.3; }
+
+  .q-card-index {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+
   .q-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 100px;
+    font-size: 84px;
     font-weight: 300;
-    color: var(--border);
+    color: var(--accent2);
+    opacity: 0.12;
     line-height: 1;
-    margin-bottom: -16px;
+    margin-bottom: -28px;
     user-select: none;
   }
 
   .q-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(22px, 4vw, 34px);
+    font-size: clamp(22px, 4vw, 32px);
     font-weight: 300;
     line-height: 1.6;
     color: var(--accent2);
     text-align: center;
-    margin-bottom: 40px;
-    transition: opacity 0.3s;
+    position: relative;
   }
+
+  .q-card-group {
+    margin-top: 24px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+  }
+
+  /* light sweep across the card as it is drawn */
+  .card-sheen {
+    position: absolute;
+    top: 0; left: 0;
+    width: 60%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(232,213,176,0.10), transparent);
+    transform: translateX(-150%) skewX(-12deg);
+    pointer-events: none;
+  }
+
+  @keyframes cardDraw {
+    0%   { opacity: 0; transform: translateY(64px) rotateX(22deg) scale(0.9); }
+    55%  { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
+  }
+  @keyframes cardDrawBack {
+    0%   { opacity: 0; transform: translateY(-48px) rotateX(-18deg) scale(0.92); }
+    55%  { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
+  }
+  @keyframes sheenSweep {
+    0%   { transform: translateX(-150%) skewX(-12deg); }
+    100% { transform: translateX(280%) skewX(-12deg); }
+  }
+
+  .q-card.drawing { animation: cardDraw 0.55s cubic-bezier(0.18,0.72,0.2,1); }
+  .q-card.drawing-back { animation: cardDrawBack 0.5s cubic-bezier(0.18,0.72,0.2,1); }
+  .q-card.drawing .card-sheen,
+  .q-card.drawing-back .card-sheen { animation: sheenSweep 0.7s ease 0.05s; }
 
   /* Timer */
   .timer-wrap {
@@ -695,10 +845,74 @@
 
   .fade-in { animation: fadeIn 0.4s ease forwards; }
 
+  /* keep the gaze countdown clear of the bottom gesture bar */
+  #page-summary, #page-gaze { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+
   /* ── RESPONSIVE ── */
+  /* Tablet & small laptop */
+  @media (max-width: 768px) {
+    #page-intro, #page-setup, #page-summary, #page-gaze { padding: 32px 20px; }
+    .q-main { padding: 32px 20px; }
+    .gaze-title { font-size: 40px; }
+    .gaze-ring, .gaze-ring svg { width: 180px; height: 180px; }
+    .summary-header h2 { font-size: 40px; }
+  }
+
+  /* Phones */
   @media (max-width: 480px) {
-    .names-row { flex-direction: column; }
-    .q-number { font-size: 64px; }
+    .names-row { flex-direction: column; gap: 0; }
+    .q-number { font-size: 56px; }
+    .q-text { margin-bottom: 28px; }
+
+    /* Header reflows: title row on top, controls below */
+    .q-header { padding: 14px 16px; padding-top: max(14px, env(safe-area-inset-top)); gap: 8px; }
+    .q-header-left { gap: 10px; }
+    .q-logo { font-size: 14px; }
+    .q-header-right { gap: 8px; margin-left: auto; }
+    .q-header-right .btn-ghost { font-size: 11px; padding: 8px 10px; }
+
+    .turn-banner { padding: 10px 16px; }
+    .q-main { padding: 24px 16px; }
+
+    .intro-story .highlight { padding: 14px 16px; }
+    .group-chip { min-width: 0; padding: 12px 8px; }
+    .group-chip .num { font-size: 22px; }
+
+    .gaze-timer-big { font-size: 72px; }
+    .gaze-ring, .gaze-ring svg { width: 160px; height: 160px; }
+
+    .summary-stats { gap: 10px; }
+    .stat-box { min-width: 0; padding: 16px 8px; }
+    .stat-num { font-size: 32px; }
+    .summary-q-note { margin-left: 0; }
+
+    /* Comfortable touch targets */
+    .btn { padding: 14px 22px; }
+    .q-actions { width: 100%; }
+    .q-actions .btn { flex: 1; min-width: 0; }
+
+    .resume-card { flex-direction: column; align-items: stretch; }
+    .resume-card-actions { justify-content: space-between; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 360px) {
+    .q-number { font-size: 48px; }
+    .q-text { font-size: 20px; }
+    .gaze-timer-big { font-size: 60px; }
+    .timer-options { gap: 6px; }
+    .timer-option { padding: 9px 12px; font-size: 12px; }
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .intro-eyebrow, .intro-title, .intro-subtitle, .intro-divider,
+    .intro-story, .intro-footer, .resume-card { opacity: 1 !important; }
   }
 </style>
 </head>
@@ -708,8 +922,19 @@
 <div id="page-intro" class="page active">
   <div class="intro-glow"></div>
   <div class="intro-content">
+    <div class="resume-card" id="resume-card">
+      <div class="resume-card-info">
+        <div class="resume-card-title">繼續上次的對話</div>
+        <div class="resume-card-sub" id="resume-card-sub">你停在第 12 題</div>
+      </div>
+      <div class="resume-card-actions">
+        <button class="btn btn-primary" onclick="resumeProgress()">繼續 →</button>
+        <button class="btn btn-ghost" onclick="deleteProgress()">刪除進度</button>
+      </div>
+    </div>
+
     <div class="intro-eyebrow">Arthur Aron · 1997</div>
-    <div class="intro-title">36個<br>問題</div>
+    <h1 class="intro-title">36個<br>問題</h1>
     <div class="intro-subtitle">讓兩個人更靠近</div>
     <div class="intro-divider"></div>
 
@@ -796,6 +1021,7 @@
     </div>
     <div class="q-header-right">
       <span class="q-progress-text" id="progress-text">1 / 36</span>
+      <button class="btn btn-ghost" onclick="saveAndExit()" title="儲存並離開">儲存並離開</button>
       <button class="btn btn-ghost" onclick="confirmReset()" title="重新開始">✕</button>
     </div>
   </div>
@@ -812,8 +1038,15 @@
   </div>
 
   <div class="q-main">
-    <div class="q-number" id="q-number">01</div>
-    <div class="q-text fade-in" id="q-text">問題文字</div>
+    <div class="q-deck">
+      <div class="q-card" id="q-card">
+        <div class="card-sheen"></div>
+        <div class="q-card-index" id="q-card-index">01 / 36</div>
+        <div class="q-number" id="q-number">01</div>
+        <div class="q-text" id="q-text">問題文字</div>
+        <div class="q-card-group" id="q-card-group">第一組 · 相互了解</div>
+      </div>
+    </div>
 
     <div class="timer-wrap" id="timer-wrap">
       <div class="timer-circle">
@@ -972,19 +1205,60 @@ function init() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     try {
-      const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed };
-      // If game was in progress
-      if (state.current > 0 || state.answers.some(Boolean)) {
-        if (confirm('你有未完成的進度，要繼續嗎？')) {
-          showPage('page-question');
-          renderQuestion();
-          return;
-        }
-      }
+      state = { ...state, ...JSON.parse(saved) };
     } catch(e) {}
   }
+  refreshResumeCard();
   showPage('page-intro');
+}
+
+// Is there a real, unfinished session worth resuming?
+function hasProgress() {
+  return localStorage.getItem(STORAGE_KEY) !== null &&
+    (state.current > 0 || state.answers.some(Boolean) ||
+     state.skipped.some(Boolean) || state.notes.some(n => n && n.trim()));
+}
+
+// Show/hide the "continue last session" card on the intro page
+function refreshResumeCard() {
+  const card = document.getElementById('resume-card');
+  if (hasProgress()) {
+    document.getElementById('resume-card-sub').textContent =
+      `${state.name1} 與 ${state.name2} · 停在第 ${state.current + 1} 題`;
+    card.classList.add('show');
+  } else {
+    card.classList.remove('show');
+  }
+}
+
+function resumeProgress() {
+  showPage('page-question');
+  renderQuestion();
+}
+
+function deleteProgress() {
+  if (confirm('確定要刪除已儲存的進度嗎？此動作無法復原。')) {
+    localStorage.removeItem(STORAGE_KEY);
+    resetStateData();
+    refreshResumeCard();
+  }
+}
+
+// Save current answer + progress, then return to the intro screen
+function saveAndExit() {
+  saveCurrentNote();
+  clearInterval(timerInterval);
+  saveState();
+  refreshResumeCard();
+  showPage('page-intro');
+}
+
+function resetStateData() {
+  state.current = 0;
+  state.turn = 0;
+  state.notes = Array(36).fill('');
+  state.skipped = Array(36).fill(false);
+  state.answers = Array(36).fill(false);
 }
 
 function saveState() {
@@ -1030,16 +1304,16 @@ function renderQuestion() {
   const q = QUESTIONS[i];
   const group = i < 12 ? 1 : i < 24 ? 2 : 3;
 
-  // Number
+  // Card content
   document.getElementById('q-number').textContent = String(i + 1).padStart(2, '0');
+  document.getElementById('q-text').textContent = q;
+  document.getElementById('q-card-index').textContent = `${String(i + 1).padStart(2, '0')} / 36`;
+  const groupName = group === 1 ? '相互了解' : group === 2 ? '深入內心' : '真實的你';
+  document.getElementById('q-card-group').textContent =
+    `第${group === 1 ? '一' : group === 2 ? '二' : '三'}組 · ${groupName}`;
 
-  // Text with fade
-  const qText = document.getElementById('q-text');
-  qText.style.opacity = 0;
-  setTimeout(() => {
-    qText.textContent = q;
-    qText.style.opacity = 1;
-  }, 150);
+  // Draw the card in (retrigger the CSS animation)
+  drawCard();
 
   // Group badge
   const badge = document.getElementById('group-badge');
@@ -1066,6 +1340,17 @@ function renderQuestion() {
 
   // Timer
   startTimer();
+}
+
+// Direction of the last navigation, drives which way the card is dealt
+let navDirection = 'forward';
+
+function drawCard() {
+  const card = document.getElementById('q-card');
+  const cls = navDirection === 'back' ? 'drawing-back' : 'drawing';
+  card.classList.remove('drawing', 'drawing-back');
+  void card.offsetWidth; // force reflow so the animation can replay
+  card.classList.add(cls);
 }
 
 function startTimer() {
@@ -1122,6 +1407,7 @@ function autoSaveNote() {
 function nextQuestion() {
   saveCurrentNote();
   clearInterval(timerInterval);
+  navDirection = 'forward';
   state.answers[state.current] = true;
   state.turn = 1 - state.turn;
 
@@ -1140,6 +1426,7 @@ function prevQuestion() {
   if (state.current === 0) return;
   saveCurrentNote();
   clearInterval(timerInterval);
+  navDirection = 'back';
   state.turn = 1 - state.turn;
   state.current--;
   saveState();
@@ -1149,6 +1436,7 @@ function prevQuestion() {
 function skipQuestion() {
   saveCurrentNote();
   clearInterval(timerInterval);
+  navDirection = 'forward';
   state.skipped[state.current] = true;
   state.turn = 1 - state.turn;
 
@@ -1166,13 +1454,10 @@ function skipQuestion() {
 function confirmReset() {
   if (confirm('確定要重新開始嗎？所有記錄將會清除。')) {
     localStorage.removeItem(STORAGE_KEY);
-    state.current = 0;
-    state.turn = 0;
-    state.notes = Array(36).fill('');
-    state.skipped = Array(36).fill(false);
-    state.answers = Array(36).fill(false);
+    resetStateData();
     clearInterval(timerInterval);
     resetGaze();
+    refreshResumeCard();
     showPage('page-intro');
   }
 }
