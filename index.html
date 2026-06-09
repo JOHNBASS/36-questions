@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>36個問題 — 讓兩個人更靠近</title>
+<meta name="description" content="基於心理學家 Arthur Aron 的研究：用36個逐漸深入的問題，讓兩個人更靠近。完全本地儲存、不上傳，最後可匯出成紀念。">
+<meta name="theme-color" content="#0e0c0a">
+<meta name="color-scheme" content="dark">
+<!-- Open Graph / 社群分享預覽 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="36個問題 — 讓兩個人更靠近">
+<meta property="og:description" content="用36個逐漸深入的問題，讓兩個人更靠近。私密、本地儲存，最後留下專屬紀念。">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%AF%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c0a;
+    --surface: #17140f;
+    --surface2: #1f1b15;
+    --border: #2e2820;
+    --accent: #c9a97a;
+    --accent2: #e8d5b0;
+    --text: #e8e0d4;
+    --text-muted: #8a7e6e;
+    --text-soft: #b5a990;
+    --group1: #7a9c8a;
+    --group2: #8a7a9c;
+    --group3: #9c8a7a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: flex; flex-direction: column; }
+
+  /* ── INTRO PAGE ── */
+  #page-intro {
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .intro-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201,169,122,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .intro-content { max-width: 560px; position: relative; z-index: 1; }
+
+  .intro-footer {
+    margin-top: 56px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .intro-footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .intro-footer a:hover { border-color: var(--accent); }
+
+  .intro-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--accent2);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .intro-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .intro-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .intro-story {
+    text-align: left;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .intro-story h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--accent2);
+    margin-bottom: 16px;
+  }
+
+  .intro-story p {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+
+  .intro-story .highlight {
+    background: rgba(201,169,122,0.08);
+    border-left: 2px solid var(--accent);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-style: italic;
+    color: var(--accent2);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .groups-preview {
+    display: flex;
+    gap: 12px;
+    margin: 32px 0;
+    flex-wrap: wrap;
+  }
+
+  .group-chip {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .group-chip .num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+  .group-chip .label { font-size: 11px; color: var(--text-muted); margin-top: 4px; letter-spacing: 1px; }
+  .group-chip:nth-child(1) .num { color: var(--group1); }
+  .group-chip:nth-child(2) .num { color: var(--group2); }
+  .group-chip:nth-child(3) .num { color: var(--group3); }
+
+  /* ── SETUP PAGE ── */
+  #page-setup {
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .setup-content { max-width: 480px; width: 100%; }
+
+  .setup-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .setup-content p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  .field-group { margin-bottom: 24px; }
+
+  .field-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .field-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .field-input:focus { border-color: var(--accent); }
+
+  .names-row { display: flex; gap: 12px; }
+  .names-row .field-group { flex: 1; }
+
+  .timer-options { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .timer-option {
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .timer-option.selected, .timer-option:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(201,169,122,0.08);
+  }
+
+  /* ── QUESTION PAGE ── */
+  #page-question {
+    padding: 0;
+    position: relative;
+  }
+
+  .q-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .q-header-left { display: flex; align-items: center; gap: 16px; }
+
+  .q-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .q-group-badge {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  .q-group-badge.g1 { color: var(--group1); border-color: var(--group1); background: rgba(122,156,138,0.08); }
+  .q-group-badge.g2 { color: var(--group2); border-color: var(--group2); background: rgba(138,122,156,0.08); }
+  .q-group-badge.g3 { color: var(--group3); border-color: var(--group3); background: rgba(156,138,122,0.08); }
+
+  .q-header-right { display: flex; align-items: center; gap: 12px; }
+
+  .q-progress-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    height: 2px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--group1), var(--group2), var(--group3));
+    transition: width 0.5s ease;
+  }
+
+  /* Turn indicator */
+  .turn-banner {
+    padding: 12px 24px;
+    background: rgba(201,169,122,0.06);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .turn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s ease infinite; }
+  .turn-text { font-size: 13px; color: var(--accent2); }
+  .turn-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--accent); font-style: italic; }
+
+  /* Main question area */
+  .q-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .q-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100px;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: -16px;
+    user-select: none;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--accent2);
+    text-align: center;
+    margin-bottom: 40px;
+    transition: opacity 0.3s;
+  }
+
+  /* Timer */
+  .timer-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .timer-circle {
+    position: relative;
+    width: 56px;
+    height: 56px;
+  }
+
+  .timer-circle svg {
+    transform: rotate(-90deg);
+    width: 56px;
+    height: 56px;
+  }
+
+  .timer-circle circle {
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .timer-bg { stroke: var(--border); }
+  .timer-fg { stroke: var(--accent); transition: stroke-dashoffset 1s linear; }
+
+  .timer-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--accent);
+  }
+
+  .timer-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Notes */
+  .notes-wrap {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 32px;
+  }
+
+  .notes-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .notes-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    padding: 12px 14px;
+    outline: none;
+    resize: none;
+    border-radius: 2px;
+    line-height: 1.8;
+    min-height: 80px;
+    transition: border-color 0.2s;
+  }
+
+  .notes-input:focus { border-color: var(--accent); }
+
+  /* Action buttons */
+  .q-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 14px 28px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: var(--accent2); }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+  .btn-ghost:hover { color: var(--accent); }
+
+  /* skipped badge */
+  .skipped-badge {
+    font-size: 11px;
+    color: var(--group3);
+    letter-spacing: 1px;
+    margin-left: 8px;
+    opacity: 0.7;
+  }
+
+  /* ── GAZE PAGE ── */
+  #page-gaze {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    background: radial-gradient(ellipse at center, #1a1510 0%, var(--bg) 70%);
+  }
+
+  .gaze-content { max-width: 480px; }
+
+  .gaze-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--accent2);
+    margin-bottom: 16px;
+  }
+
+  .gaze-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 48px;
+  }
+
+  .gaze-timer-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -2px;
+  }
+
+  .gaze-timer-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .gaze-ring {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+
+  .gaze-ring svg { width: 200px; height: 200px; transform: rotate(-90deg); }
+  .gaze-ring-bg { stroke: var(--border); fill: none; stroke-width: 1.5; }
+  .gaze-ring-fg { stroke: var(--accent); fill: none; stroke-width: 1.5; transition: stroke-dashoffset 1s linear; }
+
+  .gaze-center-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── SUMMARY PAGE ── */
+  #page-summary {
+    padding: 40px 24px;
+    align-items: center;
+  }
+
+  .summary-content { max-width: 600px; width: 100%; }
+
+  .summary-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .summary-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .summary-header p { font-size: 14px; color: var(--text-muted); }
+
+  .summary-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    flex: 1;
+    min-width: 100px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; margin-top: 4px; }
+
+  .summary-questions { margin-bottom: 40px; }
+
+  .summary-q {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+
+  .summary-q-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .summary-q-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--text-muted);
+    min-width: 28px;
+  }
+
+  .summary-q-text {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  .summary-q-note {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-left: 2px solid var(--accent);
+    margin-top: 8px;
+    margin-left: 40px;
+    white-space: pre-wrap;
+  }
+
+  .skipped-label { font-size: 11px; color: var(--group3); letter-spacing: 1px; }
+
+  .summary-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── CROSS-PROMO ── */
+  .cross-promo {
+    display: block;
+    margin-top: 48px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    background: rgba(201,169,122,0.03);
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  }
+  .cross-promo:hover {
+    border-color: var(--accent);
+    background: rgba(201,169,122,0.07);
+    transform: translateY(-2px);
+  }
+  .cross-promo-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .cross-promo-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .cross-promo-sub { font-size: 13px; color: var(--text-soft); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-in { animation: fadeIn 0.4s ease forwards; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .names-row { flex-direction: column; }
+    .q-number { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ INTRO PAGE ══════════ -->
+<div id="page-intro" class="page active">
+  <div class="intro-glow"></div>
+  <div class="intro-content">
+    <div class="intro-eyebrow">Arthur Aron · 1997</div>
+    <div class="intro-title">36個<br>問題</div>
+    <div class="intro-subtitle">讓兩個人更靠近</div>
+    <div class="intro-divider"></div>
+
+    <div class="intro-story">
+      <h2>這些問題從哪裡來？</h2>
+      <p>1997年，心理學家 Arthur Aron 做了一個實驗：讓兩個陌生人坐下來，用45分鐘回答36個越來越深入的問題。</p>
+      <p>實驗結果震驚了學界——許多人在結束後感受到真實的情感連結，有些人甚至在幾個月後結婚。</p>
+      <div class="highlight">
+        「親密感不需要時間，<br>它需要的是——願意被對方看見。」
+      </div>
+      <p>這36個問題分為三組，逐漸深入，從輕鬆的話題，到你的價值觀、你的脆弱、你的遺憾。</p>
+
+      <div class="groups-preview">
+        <div class="group-chip">
+          <div class="num">1–12</div>
+          <div class="label">相互了解</div>
+        </div>
+        <div class="group-chip">
+          <div class="num">13–24</div>
+          <div class="label">深入內心</div>
+        </div>
+        <div class="group-chip">
+          <div class="num">25–36</div>
+          <div class="label">真實的你</div>
+        </div>
+      </div>
+
+      <p>最後，有一個四分鐘的「對視」——什麼都不用說，只是看著對方的眼睛。</p>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <button class="btn btn-primary" onclick="showPage('page-setup')" style="font-size: 15px; padding: 16px 40px;">
+        開始之前，先設定一下 →
+      </button>
+    </div>
+
+    <div class="intro-footer">
+      另一個作品 ·
+      <a href="https://johnbass.github.io/thinking-leverage-cards/" target="_blank" rel="noopener">思考槓桿卡</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SETUP PAGE ══════════ -->
+<div id="page-setup" class="page">
+  <div class="setup-content">
+    <h2>在開始之前</h2>
+    <p>填寫你們兩個人的名字，讓體驗更個人化。<br>也可以設定每題的回答時間。</p>
+
+    <div class="names-row">
+      <div class="field-group">
+        <label class="field-label">第一個人</label>
+        <input class="field-input" id="name1" type="text" placeholder="你的名字" maxlength="10">
+      </div>
+      <div class="field-group">
+        <label class="field-label">第二個人</label>
+        <input class="field-input" id="name2" type="text" placeholder="對方的名字" maxlength="10">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">每題計時（秒）</label>
+      <div class="timer-options">
+        <div class="timer-option" onclick="selectTimer(this, 0)">不計時</div>
+        <div class="timer-option selected" onclick="selectTimer(this, 120)">2 分鐘</div>
+        <div class="timer-option" onclick="selectTimer(this, 180)">3 分鐘</div>
+        <div class="timer-option" onclick="selectTimer(this, 300)">5 分鐘</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; gap: 12px;">
+      <button class="btn btn-secondary" onclick="showPage('page-intro')">← 返回</button>
+      <button class="btn btn-primary" onclick="startGame()">開始 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUESTION PAGE ══════════ -->
+<div id="page-question" class="page" style="flex-direction: column;">
+  <div class="q-header">
+    <div class="q-header-left">
+      <div class="q-logo">36 問題</div>
+      <div class="q-group-badge g1" id="group-badge">第一組</div>
+    </div>
+    <div class="q-header-right">
+      <span class="q-progress-text" id="progress-text">1 / 36</span>
+      <button class="btn btn-ghost" onclick="confirmReset()" title="重新開始">✕</button>
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+  </div>
+
+  <div class="turn-banner">
+    <div class="turn-dot"></div>
+    <div class="turn-text">輪到</div>
+    <div class="turn-name" id="turn-name">—</div>
+    <div class="turn-text">回答</div>
+  </div>
+
+  <div class="q-main">
+    <div class="q-number" id="q-number">01</div>
+    <div class="q-text fade-in" id="q-text">問題文字</div>
+
+    <div class="timer-wrap" id="timer-wrap">
+      <div class="timer-circle">
+        <svg viewBox="0 0 56 56">
+          <circle class="timer-bg" cx="28" cy="28" r="25"/>
+          <circle class="timer-fg" id="timer-ring" cx="28" cy="28" r="25" stroke-dasharray="157" stroke-dashoffset="0"/>
+        </svg>
+        <div class="timer-num" id="timer-num">—</div>
+      </div>
+      <div class="timer-label">剩餘時間</div>
+    </div>
+
+    <div class="notes-wrap">
+      <span class="notes-label">記下重要的話（選填）</span>
+      <textarea class="notes-input" id="notes-input" placeholder="在這裡寫下這題的回應、感受，或任何想留下的話…" rows="3" oninput="autoSaveNote()"></textarea>
+    </div>
+
+    <div class="q-actions">
+      <button class="btn btn-secondary" onclick="prevQuestion()">← 上一題</button>
+      <button class="btn btn-ghost" onclick="skipQuestion()">跳過 <span class="skipped-badge">→</span></button>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">下一題 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ GAZE PAGE ══════════ -->
+<div id="page-gaze" class="page">
+  <div class="gaze-content">
+    <div class="gaze-title">最後一步</div>
+    <p class="gaze-sub">
+      36個問題都完成了。<br><br>
+      現在，放下手機，看著對方的眼睛。<br>
+      不需要說話，只是凝視。<br>
+      四分鐘。
+    </p>
+
+    <div class="gaze-ring">
+      <svg viewBox="0 0 200 200">
+        <circle class="gaze-ring-bg" cx="100" cy="100" r="90"/>
+        <circle class="gaze-ring-fg" id="gaze-ring" cx="100" cy="100" r="90" stroke-dasharray="565" stroke-dashoffset="0"/>
+      </svg>
+      <div class="gaze-center-text">
+        <div class="gaze-timer-big" id="gaze-time">4:00</div>
+        <div class="gaze-timer-label" id="gaze-label">分鐘</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <button class="btn btn-primary" id="gaze-btn" onclick="toggleGaze()">開始凝視</button>
+      <button class="btn btn-secondary" onclick="skipGaze()">跳過，看結果</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUMMARY PAGE ══════════ -->
+<div id="page-summary" class="page">
+  <div class="summary-content">
+    <div class="summary-header">
+      <h2>你們做到了</h2>
+      <p id="summary-names">兩個人的36個問題</p>
+    </div>
+
+    <div class="summary-stats">
+      <div class="stat-box">
+        <div class="stat-num" id="stat-answered">0</div>
+        <div class="stat-label">已回答</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-skipped">0</div>
+        <div class="stat-label">已跳過</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-notes">0</div>
+        <div class="stat-label">有記錄</div>
+      </div>
+    </div>
+
+    <div class="summary-questions" id="summary-questions"></div>
+
+    <div class="summary-actions">
+      <button class="btn btn-primary" onclick="exportPDF()">匯出 PDF 紀念</button>
+      <button class="btn btn-secondary" onclick="confirmReset()">再玩一次</button>
+    </div>
+
+    <a class="cross-promo" href="https://johnbass.github.io/thinking-leverage-cards/" target="_blank" rel="noopener">
+      <div class="cross-promo-eyebrow">如果你喜歡這個體驗</div>
+      <div class="cross-promo-title">思考槓桿卡 — Thinking Leverage</div>
+      <div class="cross-promo-sub">用一副卡片，換一個看問題的角度　→</div>
+    </a>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const QUESTIONS = [
+  "給你一個任意的機會，你會選擇和誰共進晚餐？",
+  "你想要成名嗎？以什麼方式？",
+  "打電話前，你會事先排演嗎？為什麼？",
+  "你心中一個完美的日子是怎樣的？",
+  "你上次唱歌是什麼時候？對自己還是對某人？",
+  "如果你可以活到90歲，而且身心都保持在30歲的狀態，那這60年你想要怎麼度過？",
+  "關於怎麼死去，你有沒有過神秘的預感？",
+  "舉出你和你對面這位的3個共同點。",
+  "你人生中最感激的是什麼？",
+  "如果可以改變你的成長過程，你想要改變什麼？",
+  "你只有4分鐘時間，但請在這4分鐘內盡量詳細地講述你的人生故事。",
+  "如果你明天醒來時能得到一種新的能力或品質，你想要的是什麼？",
+  "如果水晶球可以預測你的未來以及一切，你想要知道什麼？",
+  "有沒有什麼是你夢寐以求的？但為什麼沒有做？",
+  "你人生中最大的成就是什麼？",
+  "友誼中你最珍視的是什麼？",
+  "你最珍貴的回憶是什麼？",
+  "你最糟糕的記憶是什麼？",
+  "如果你知道你只有一年可以活了，你會改變你的生活方式嗎？為什麼？",
+  "對於你，友誼意味著什麼？",
+  "愛與喜歡在你的人生中分別扮演什麼角色？",
+  "輪流分享你認為戀人應該具有的好品質，總共分享5個。",
+  "你的家庭親密、溫暖嗎？你覺得你的童年是不是比其他人更幸福一些？",
+  "你與母親的關係怎樣？",
+  "用「我們」做主語造3個句子，比如「我們都在這間屋子裡……」",
+  "補全這個句子：「我希望有人可以與我分享……」",
+  "要和對面那位成為好朋友，他或者她最應該知道的事情是什麼？請與他或她分享。",
+  "告訴你對面那位，你喜歡他（她）什麼？必須非常誠實，說一些你可能不會和第一次見面的人說的話。",
+  "分享一件你人生中的囧事。",
+  "你上一次哭是什麼時候？當著他人的面還是獨自一人？",
+  "告訴對面那位，你已經開始喜歡他身上的一些東西。",
+  "有什麼事情是不能隨便開玩笑的？",
+  "如果你今夜就會死去，而且沒有機會和任何人說，你最遺憾的沒有說出口的話是？為什麼你還沒有告訴他們？",
+  "你的家著火了，而且你所有的東西都在裡面。在救出你的愛人和寵物以後，你還有機會安全救出一樣東西。你會救什麼？為什麼？",
+  "你的家庭中誰死去會最讓你困擾？為什麼？",
+  "分享一個你的私人困擾，並向你對面那位請求解決建議，請他（她）以自己的方式來解決。然後，再詢問他（她）對於這個問題的個人感受。"
+];
+
+// ── STATE ──
+let state = {
+  name1: '你',
+  name2: '對方',
+  timerSeconds: 120,
+  current: 0,
+  turn: 0, // 0 = name1, 1 = name2
+  notes: Array(36).fill(''),
+  skipped: Array(36).fill(false),
+  answers: Array(36).fill(false),
+};
+
+let timerInterval = null;
+let timerLeft = 0;
+let gazeInterval = null;
+let gazeLeft = 240;
+let gazeRunning = false;
+
+const STORAGE_KEY = '36q_state_v2';
+
+// ── INIT ──
+function init() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      state = { ...state, ...parsed };
+      // If game was in progress
+      if (state.current > 0 || state.answers.some(Boolean)) {
+        if (confirm('你有未完成的進度，要繼續嗎？')) {
+          showPage('page-question');
+          renderQuestion();
+          return;
+        }
+      }
+    } catch(e) {}
+  }
+  showPage('page-intro');
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ── NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── SETUP ──
+let selectedTimer = 120;
+
+function selectTimer(el, val) {
+  document.querySelectorAll('.timer-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTimer = val;
+}
+
+function startGame() {
+  const n1 = document.getElementById('name1').value.trim() || '你';
+  const n2 = document.getElementById('name2').value.trim() || '對方';
+  state.name1 = n1;
+  state.name2 = n2;
+  state.timerSeconds = selectedTimer;
+  state.current = 0;
+  state.turn = 0;
+  state.notes = Array(36).fill('');
+  state.skipped = Array(36).fill(false);
+  state.answers = Array(36).fill(false);
+  resetGaze();
+  saveState();
+  showPage('page-question');
+  renderQuestion();
+}
+
+// ── QUESTION RENDERING ──
+function renderQuestion() {
+  const i = state.current;
+  const q = QUESTIONS[i];
+  const group = i < 12 ? 1 : i < 24 ? 2 : 3;
+
+  // Number
+  document.getElementById('q-number').textContent = String(i + 1).padStart(2, '0');
+
+  // Text with fade
+  const qText = document.getElementById('q-text');
+  qText.style.opacity = 0;
+  setTimeout(() => {
+    qText.textContent = q;
+    qText.style.opacity = 1;
+  }, 150);
+
+  // Group badge
+  const badge = document.getElementById('group-badge');
+  badge.className = 'q-group-badge g' + group;
+  badge.textContent = group === 1 ? '第一組' : group === 2 ? '第二組' : '第三組';
+
+  // Progress
+  const answered = state.answers.filter(Boolean).length;
+  document.getElementById('progress-text').textContent = `${i + 1} / 36`;
+  document.getElementById('progress-bar').style.width = ((i + 1) / 36 * 100) + '%';
+
+  // Turn
+  const turnName = state.turn === 0 ? state.name1 : state.name2;
+  document.getElementById('turn-name').textContent = turnName;
+
+  // Notes
+  document.getElementById('notes-input').value = state.notes[i] || '';
+
+  // Next button
+  document.getElementById('next-btn').textContent = i === 35 ? '完成 →' : '下一題 →';
+
+  // Prev button visibility
+  document.querySelectorAll('.q-actions .btn-secondary')[0].style.visibility = i === 0 ? 'hidden' : 'visible';
+
+  // Timer
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  if (state.timerSeconds === 0) {
+    document.getElementById('timer-wrap').style.display = 'none';
+    return;
+  }
+  document.getElementById('timer-wrap').style.display = 'flex';
+  timerLeft = state.timerSeconds;
+  updateTimerUI();
+
+  timerInterval = setInterval(() => {
+    timerLeft--;
+    updateTimerUI();
+    if (timerLeft <= 0) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  const total = state.timerSeconds;
+  const pct = timerLeft / total;
+  const circumference = 157;
+  const offset = circumference * (1 - pct);
+
+  document.getElementById('timer-ring').style.strokeDashoffset = offset;
+
+  const mins = Math.floor(timerLeft / 60);
+  const secs = timerLeft % 60;
+  document.getElementById('timer-num').textContent =
+    mins > 0 ? `${mins}:${String(secs).padStart(2,'0')}` : timerLeft;
+
+  // color shift
+  const ring = document.getElementById('timer-ring');
+  if (pct > 0.5) ring.style.stroke = 'var(--accent)';
+  else if (pct > 0.2) ring.style.stroke = '#c9a05a';
+  else ring.style.stroke = '#c97a7a';
+}
+
+function saveCurrentNote() {
+  state.notes[state.current] = document.getElementById('notes-input').value;
+}
+
+// Auto-save while typing (debounced) so notes survive an accidental close
+let autoSaveTimer = null;
+function autoSaveNote() {
+  saveCurrentNote();
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(saveState, 400);
+}
+
+function nextQuestion() {
+  saveCurrentNote();
+  clearInterval(timerInterval);
+  state.answers[state.current] = true;
+  state.turn = 1 - state.turn;
+
+  if (state.current === 35) {
+    saveState();
+    showPage('page-gaze');
+    return;
+  }
+
+  state.current++;
+  saveState();
+  renderQuestion();
+}
+
+function prevQuestion() {
+  if (state.current === 0) return;
+  saveCurrentNote();
+  clearInterval(timerInterval);
+  state.turn = 1 - state.turn;
+  state.current--;
+  saveState();
+  renderQuestion();
+}
+
+function skipQuestion() {
+  saveCurrentNote();
+  clearInterval(timerInterval);
+  state.skipped[state.current] = true;
+  state.turn = 1 - state.turn;
+
+  if (state.current === 35) {
+    saveState();
+    showPage('page-gaze');
+    return;
+  }
+
+  state.current++;
+  saveState();
+  renderQuestion();
+}
+
+function confirmReset() {
+  if (confirm('確定要重新開始嗎？所有記錄將會清除。')) {
+    localStorage.removeItem(STORAGE_KEY);
+    state.current = 0;
+    state.turn = 0;
+    state.notes = Array(36).fill('');
+    state.skipped = Array(36).fill(false);
+    state.answers = Array(36).fill(false);
+    clearInterval(timerInterval);
+    resetGaze();
+    showPage('page-intro');
+  }
+}
+
+// ── GAZE TIMER ──
+function resetGaze() {
+  clearInterval(gazeInterval);
+  gazeRunning = false;
+  gazeLeft = 240;
+  const btn = document.getElementById('gaze-btn');
+  btn.textContent = '開始凝視';
+  btn.onclick = toggleGaze;
+  updateGazeUI();
+}
+
+function toggleGaze() {
+  if (!gazeRunning) {
+    gazeRunning = true;
+    document.getElementById('gaze-btn').textContent = '暫停';
+    gazeInterval = setInterval(() => {
+      gazeLeft--;
+      updateGazeUI();
+      if (gazeLeft <= 0) {
+        clearInterval(gazeInterval);
+        gazeRunning = false;
+        document.getElementById('gaze-btn').textContent = '完成';
+        document.getElementById('gaze-btn').onclick = () => showSummary();
+      }
+    }, 1000);
+  } else {
+    gazeRunning = false;
+    clearInterval(gazeInterval);
+    document.getElementById('gaze-btn').textContent = '繼續';
+  }
+}
+
+function updateGazeUI() {
+  const total = 240;
+  const pct = gazeLeft / total;
+  const circumference = 565;
+  const offset = circumference * (1 - pct);
+  document.getElementById('gaze-ring').style.strokeDashoffset = offset;
+
+  const mins = Math.floor(gazeLeft / 60);
+  const secs = gazeLeft % 60;
+  document.getElementById('gaze-time').textContent = `${mins}:${String(secs).padStart(2,'0')}`;
+}
+
+function skipGaze() {
+  clearInterval(gazeInterval);
+  showSummary();
+}
+
+// ── SUMMARY ──
+function showSummary() {
+  showPage('page-summary');
+
+  const answered = state.answers.filter(Boolean).length;
+  const skipped = state.skipped.filter(Boolean).length;
+  const noted = state.notes.filter(n => n.trim()).length;
+
+  document.getElementById('stat-answered').textContent = answered;
+  document.getElementById('stat-skipped').textContent = skipped;
+  document.getElementById('stat-notes').textContent = noted;
+  document.getElementById('summary-names').textContent = `${state.name1} 與 ${state.name2} 的36個問題`;
+
+  const container = document.getElementById('summary-questions');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((q, i) => {
+    const note = state.notes[i];
+    const skippedQ = state.skipped[i];
+    if (!note && !skippedQ && !state.answers[i]) return;
+
+    const div = document.createElement('div');
+    div.className = 'summary-q';
+    div.innerHTML = `
+      <div class="summary-q-header">
+        <span class="summary-q-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="summary-q-text">${q}</span>
+        ${skippedQ ? '<span class="skipped-label">跳過</span>' : ''}
+      </div>
+      ${note ? `<div class="summary-q-note">${note}</div>` : ''}
+    `;
+    container.appendChild(div);
+  });
+
+  if (container.innerHTML === '') {
+    container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 40px 0; font-size: 14px;">沒有記下任何回應，但你們的對話已經在彼此心中了。</p>';
+  }
+}
+
+// ── EXPORT PDF ──
+function exportPDF() {
+  const date = new Date().toLocaleDateString('zh-TW');
+  let content = `36個問題 — ${state.name1} 與 ${state.name2}\n${date}\n`;
+  content += '─'.repeat(40) + '\n\n';
+
+  QUESTIONS.forEach((q, i) => {
+    content += `${String(i+1).padStart(2,'0')}. ${q}\n`;
+    if (state.skipped[i]) content += '    [已跳過]\n';
+    if (state.notes[i]) content += `    → ${state.notes[i]}\n`;
+    content += '\n';
+  });
+
+  // Create printable window
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>36個問題 — ${state.name1} 與 ${state.name2}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap');
+  body { font-family: 'Noto Serif TC', serif; max-width: 600px; margin: 60px auto; padding: 0 24px; color: #1a1814; line-height: 1.9; }
+  h1 { font-weight: 300; font-size: 32px; margin-bottom: 4px; }
+  .date { color: #888; font-size: 13px; margin-bottom: 40px; }
+  .q { margin-bottom: 28px; border-bottom: 1px solid #e8e0d4; padding-bottom: 20px; }
+  .q-num { color: #b5a990; font-size: 12px; letter-spacing: 2px; }
+  .q-text { font-size: 16px; margin: 6px 0 10px; }
+  .q-note { background: #f8f4ef; border-left: 3px solid #c9a97a; padding: 10px 14px; font-size: 14px; color: #5a4e3a; white-space: pre-wrap; }
+  .skipped { color: #c97a7a; font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>36個問題</h1>
+<div class="date">${state.name1} 與 ${state.name2}　·　${date}</div>
+${QUESTIONS.map((q, i) => {
+  const note = state.notes[i];
+  const skipped = state.skipped[i];
+  return `<div class="q">
+  <div class="q-num">問題 ${String(i+1).padStart(2,'0')}</div>
+  <div class="q-text">${q}</div>
+  ${skipped ? '<div class="skipped">跳過</div>' : ''}
+  ${note ? `<div class="q-note">${note}</div>` : ''}
+</div>`;
+}).join('')}
+</body>
+</html>`);
+  win.document.close();
+  setTimeout(() => win.print(), 600);
+}
+
+// ── KEYBOARD NAVIGATION ──
+document.addEventListener('keydown', (e) => {
+  // Only on the question page, and not while typing in the notes/inputs
+  const onQuestion = document.getElementById('page-question').classList.contains('active');
+  const tag = (document.activeElement && document.activeElement.tagName) || '';
+  if (!onQuestion || tag === 'TEXTAREA' || tag === 'INPUT') return;
+
+  if (e.key === 'ArrowRight') { e.preventDefault(); nextQuestion(); }
+  else if (e.key === 'ArrowLeft' && state.current > 0) { e.preventDefault(); prevQuestion(); }
+});
+
+// ── START ──
+init();
+</script>
+</body>
+</html>
